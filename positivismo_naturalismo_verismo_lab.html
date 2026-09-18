@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Positivismo, Naturalismo e Verismo — laboratorio interattivo</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --ink:#17202a; --muted:#5d6875;
+  --accent:#145a7a; --accent2:#e0a11a; --ok:#24734d; --bad:#a33a3a;
+  --line:#d9dee5; --shadow:0 8px 24px rgba(20,35,50,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
+header{background:linear-gradient(135deg,#102f40,#145a7a);color:white;padding:44px 20px 34px}
+.wrap{max-width:1120px;margin:auto}
+.kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;opacity:.8}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;margin:.3em 0}
+h2{margin-top:0;font-size:1.65rem}
+h3{margin-bottom:.35rem}
+.lead{max-width:800px;font-size:1.08rem}
+nav{position:sticky;top:0;z-index:20;background:#102f40;color:white;box-shadow:0 2px 10px #0002}
+nav .navin{display:flex;gap:8px;overflow:auto;padding:8px 12px}
+nav a{color:white;text-decoration:none;padding:8px 11px;border-radius:8px;white-space:nowrap;font-size:.9rem}
+nav a:hover{background:#ffffff18}
+main{padding:28px 16px 70px}
+section{margin:0 auto 28px;max-width:1120px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.badge{display:inline-block;background:#edf4f7;color:var(--accent);border-radius:999px;padding:4px 10px;font-size:.8rem;font-weight:700}
+.callout{border-left:5px solid var(--accent2);padding:12px 16px;background:#fff9e9;border-radius:8px}
+button,.choice{font:inherit}
+button{border:0;background:var(--accent);color:white;padding:10px 15px;border-radius:9px;cursor:pointer}
+button.secondary{background:#e9eef2;color:var(--ink)}
+button:hover{filter:brightness(.96)}
+.choice{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:white;cursor:pointer}
+.choice:hover{border-color:var(--accent)}
+.choice.correct{border-color:var(--ok);background:#edf8f1}
+.choice.wrong{border-color:var(--bad);background:#fff0f0}
+.feedback{margin-top:10px;font-weight:650}
+.hidden{display:none}
+.progress{height:9px;background:#e5e8ec;border-radius:99px;overflow:hidden}
+.progress>span{display:block;height:100%;width:0;background:var(--accent);transition:.3s}
+img{max-width:100%;display:block}
+.figure{border-radius:12px;overflow:hidden;background:#eef1f4}
+.figure img{width:100%;height:230px;object-fit:cover}
+.caption{padding:9px 12px;font-size:.82rem;color:var(--muted)}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.time{padding:15px;border:1px solid var(--line);border-radius:12px;background:white}
+.time strong{display:block;color:var(--accent);font-size:1.1rem}
+iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.term{display:inline-block;padding:4px 8px;margin:3px;border-radius:7px;background:#eef4f7}
+table{width:100%;border-collapse:collapse}
+th,td{padding:11px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f0f4f6}
+details{border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:white;margin:8px 0}
+summary{cursor:pointer;font-weight:700}
+input,textarea{font:inherit;width:100%;border:1px solid #cbd2d9;border-radius:9px;padding:10px}
+textarea{min-height:110px}
+.small{font-size:.86rem;color:var(--muted)}
+.score{font-size:2rem;font-weight:800;color:var(--accent)}
+footer{max-width:1120px;margin:0 auto;padding:10px 16px 50px;color:var(--muted);font-size:.85rem}
+.sticky-score{position:fixed;right:16px;bottom:16px;background:#102f40;color:white;padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);z-index:30}
+@media(max-width:700px){.card{padding:16px} th,td{font-size:.9rem}.figure img{height:190px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap">
+<div class="kicker">Classe quinta · Istituto tecnico · laboratorio di letteratura</div>
+<h1>Positivismo → Naturalismo → Verismo</h1>
+<p class="lead">Un percorso interattivo per capire <strong>come cambia il modo di conoscere la realtà</strong> e come questo cambiamento entra nella letteratura.</p>
+<div class="progress" aria-label="Progresso"><span id="bar"></span></div>
+<p class="small" style="color:#dbe8ee">Obiettivo: non memorizzare una lista di definizioni, ma saper riconoscere un'idea, applicarla a un caso e spiegare il passaggio da una corrente all'altra.</p>
+</div>
+</header>
+
+<nav><div class="navin wrap">
+<a href="#start">Partenza</a><a href="#map">Mappa</a><a href="#video">Video</a><a href="#comte">Comte</a>
+<a href="#naturalismo">Naturalismo</a><a href="#verismo">Verismo</a><a href="#decisioni">Decisioni</a>
+<a href="#quiz">Quiz</a><a href="#exit">Exit ticket</a>
+</div></nav>
+
+<main>
+
+<section id="start">
+<div class="card">
+<span class="badge">0 · ATTIVA LE CONOSCENZE</span>
+<h2>Prima domanda: che cosa significa «scientifico»?</h2>
+<p>Immagina di dover spiegare perché una certa situazione sociale si ripete. Quale procedura ti sembra più vicina alla mentalità positivista?</p>
+<div id="diagnostic">
+<button class="choice" onclick="diag(this,false)">«È così perché lo dice la tradizione.»</button>
+<button class="choice" onclick="diag(this,true)">«Osservo i fatti, raccolgo dati, cerco regolarità e verifico l'ipotesi.»</button>
+<button class="choice" onclick="diag(this,false)">«Mi affido soprattutto alla mia impressione personale.»</button>
+<button class="choice" onclick="diag(this,false)">«Cerco una spiegazione soprannaturale.»</button>
+</div>
+<div id="diagfb" class="feedback"></div>
+<div class="callout"><strong>Idea-guida:</strong> il Positivismo porta nel campo della conoscenza una forte fiducia nell'osservazione dei fenomeni, nella verifica e nelle relazioni di causa-effetto. Nel testo di partenza è presentato anche come una delle condizioni culturali che favoriscono la nascita del Naturalismo. fileciteturn0file0</div>
+</div>
+</section>
+
+<section id="map">
+<div class="card">
+<span class="badge">1 · COSTRUISCI LA MAPPA</span>
+<h2>Una catena di trasformazioni</h2>
+<div class="timeline">
+<div class="time"><strong>Ottocento</strong>Seconda metà del secolo: grande fiducia nella scienza e nel progresso.</div>
+<div class="time"><strong>Positivismo</strong>Metodo, osservazione, fatti, leggi, previsione.</div>
+<div class="time"><strong>Evoluzionismo</strong>La riflessione sulla natura e sull'evoluzione alimenta il nuovo clima scientifico.</div>
+<div class="time"><strong>Realismo</strong>Maggiore attenzione alla realtà concreta e sociale.</div>
+<div class="time"><strong>Naturalismo</strong>La letteratura osserva l'uomo dentro ambiente e condizioni sociali.</div>
+<div class="time"><strong>Verismo</strong>Elaborazione italiana, soprattutto legata a Verga e alla Sicilia.</div>
+</div>
+<p class="small">Attenzione: questa è una <em>mappa di relazione</em>, non una semplice successione cronologica. Le correnti non sono «scatole» perfettamente separate.</p>
+</div>
+</section>
+
+<section id="video">
+<div class="card">
+<span class="badge">2 · MICRO-VIDEO</span>
+<h2>Guarda → ferma → formula</h2>
+<p>Video di sintesi: prima visione senza appunti. Alla seconda visione, annota tre parole che colleghino Positivismo, Naturalismo e Verismo.</p>
+<iframe src="https://www.youtube.com/embed/EhfjeaZ2D7w" title="Positivismo, Naturalismo e Verismo" allowfullscreen loading="lazy"></iframe>
+<p class="small">Video esterno su YouTube; la pagina non ne incorpora il contenuto nel file.</p>
+<textarea id="videonote" placeholder="Le mie tre parole-ponte…"></textarea>
+</div>
+</section>
+
+<section id="comte">
+<div class="grid">
+<div class="card">
+<span class="badge">3 · UN FILOSOFO</span>
+<h2>Auguste Comte</h2>
+<p>Nel percorso del manuale, Comte è presentato come il teorico della «filosofia positiva». La conoscenza scientifica tende a interrogarsi non tanto sul <strong>perché ultimo</strong>, quanto sul <strong>come</strong> dei fenomeni: rapporti, concatenazioni e leggi.</p>
+<p><strong>Tre stadi:</strong> teologico → metafisico → positivo/scientifico.</p>
+<details><summary>Perché è importante per la letteratura?</summary>
+<p>Perché il nuovo clima culturale rende pensabile anche una letteratura che osservi la realtà in modo sistematico e concreto, contribuendo alla formazione del Naturalismo.</p>
+</details>
+</div>
+<div class="card">
+<div class="figure">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/A.Comte-B02.jpg" alt="Ritratto di Auguste Comte" loading="lazy">
+<div class="caption">Auguste Comte · immagine in pubblico dominio, Wikimedia Commons.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="naturalismo">
+<div class="card">
+<span class="badge">4 · OSSERVA E CONFRONTA</span>
+<h2>Naturalismo: la letteratura come osservazione della realtà</h2>
+<p>Nel materiale di partenza il Naturalismo è collegato al clima positivista e alla ricerca di un metodo capace di osservare la realtà sociale. L'opera narrativa tende a confrontarsi con ambienti, condizioni di vita e meccanismi sociali.</p>
+<div class="grid">
+<div>
+<h3>Leggi le parole-chiave</h3>
+<span class="term">osservazione</span><span class="term">realtà sociale</span><span class="term">ambiente</span>
+<span class="term">cause</span><span class="term">condizioni</span><span class="term">documentazione</span>
+</div>
+<div>
+<h3>Domanda da quinta</h3>
+<p><strong>Se uno scrittore descrive un personaggio senza separarlo dall'ambiente sociale in cui vive, quale idea sta mettendo in primo piano?</strong></p>
+<button onclick="show('nfb')">Mostra una possibile risposta</button>
+<p id="nfb" class="hidden callout">L'idea che il comportamento individuale non possa essere compreso isolandolo dalle condizioni materiali e sociali entro cui si forma.</p>
+</div>
+</div>
+</div>
+
+<div class="grid" style="margin-top:16px">
+<div class="card">
+<div class="figure">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/%C3%89douard_Manet_-_Emile_Zola_-_Google_Art_Project.jpg" alt="Ritratto di Émile Zola dipinto da Édouard Manet" loading="lazy">
+<div class="caption">Édouard Manet, <em>Émile Zola</em>. Immagine da Wikimedia Commons.</div>
+</div>
+</div>
+<div class="card">
+<h2>Émile Zola: il laboratorio narrativo</h2>
+<p>Nel Naturalismo francese Zola diventa il riferimento centrale per una narrativa interessata ai meccanismi dell'ambiente e della società.</p>
+<p><strong>Mini-compito:</strong> scegli un fenomeno contemporaneo (pendolarismo, lavoro precario, uso dei social, mobilità urbana). Quali dati dovrebbe raccogliere un romanziere che volesse costruire un «dossier» prima di scrivere?</p>
+<textarea placeholder="Dati, osservazioni, persone da intervistare, ambienti da osservare…"></textarea>
+</div>
+</div>
+</section>
+
+<section id="verismo">
+<div class="card">
+<span class="badge">5 · CAMBIO DI PROSPETTIVA</span>
+<h2>Naturalismo francese ≠ Verismo italiano</h2>
+<p>Il Verismo nasce nel contesto italiano e rielabora alcune sollecitazioni del Naturalismo. Nel percorso del manuale, il nome decisivo è <strong>Giovanni Verga</strong>, insieme alla riflessione sulla rappresentazione della realtà e sull'impersonalità.</p>
+<div class="grid">
+<div>
+<h3>Confronto</h3>
+<table>
+<tr><th>Naturalismo</th><th>Verismo</th></tr>
+<tr><td>Francia</td><td>Italia</td></tr>
+<tr><td>Zola come figura centrale</td><td>Verga come autore centrale</td></tr>
+<tr><td>Forte legame con il clima positivista</td><td>Rielaborazione italiana di temi e tecniche realistiche</td></tr>
+<tr><td>Osservazione della società</td><td>Rappresentazione della realtà, con particolare attenzione a condizioni e ambienti</td></tr>
+</table>
+</div>
+<div class="figure">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Verga.jpg" alt="Giovanni Verga" loading="lazy">
+<div class="caption">Giovanni Verga · immagine in pubblico dominio.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="decisioni">
+<div class="card">
+<span class="badge">6 · PERCORSO DECISIONALE</span>
+<h2>Sei l'editor di un romanzo del 1880</h2>
+<p>Un autore ti consegna questa idea: <em>«Voglio raccontare la vita di una famiglia povera senza giudicarla dall'esterno.»</em></p>
+
+<div id="scenario1">
+<p><strong>Scelta 1.</strong> Che cosa gli suggerisci di fare?</p>
+<button class="choice" onclick="branch(1,'a')">A · Inserire lunghi commenti dell'autore per spiegare al lettore che cosa deve pensare.</button>
+<button class="choice" onclick="branch(1,'b')">B · Far emergere comportamenti, linguaggio e ambiente attraverso la narrazione, riducendo l'intervento esplicito dell'autore.</button>
+<button class="choice" onclick="branch(1,'c')">C · Trasformare i personaggi in eroi esemplari.</button>
+<div id="b1"></div>
+</div>
+
+<div id="scenario2" class="hidden">
+<p><strong>Scelta 2.</strong> L'autore vuole ambientare la vicenda in un paese di pescatori. Quale principio è più coerente con il progetto?</p>
+<button class="choice" onclick="branch(2,'a')">A · Rendere l'ambiente intercambiabile, perché non influenza i personaggi.</button>
+<button class="choice" onclick="branch(2,'b')">B · Usare ambiente, relazioni economiche e norme sociali per costruire concretamente il mondo dei personaggi.</button>
+<button class="choice" onclick="branch(2,'c')">C · Eliminare ogni riferimento al lavoro e alla vita quotidiana.</button>
+<div id="b2"></div>
+</div>
+
+<div id="scenario3" class="hidden">
+<p><strong>Scelta 3.</strong> Ora devi spiegare in una frase la differenza metodologica.</p>
+<button class="choice" onclick="branch(3,'a')">A · «La letteratura osserva la realtà e costruisce una rappresentazione coerente dei suoi meccanismi.»</button>
+<button class="choice" onclick="branch(3,'b')">B · «La letteratura deve sempre dire al lettore quale giudizio morale esprimere.»</button>
+<button class="choice" onclick="branch(3,'c')">C · «La realtà sociale non interessa alla narrativa.»</button>
+<div id="b3"></div>
+</div>
+</div>
+</section>
+
+<section id="quiz">
+<div class="card">
+<span class="badge">7 · VERIFICA RAPIDA</span>
+<h2>Controlla se sai applicare i concetti</h2>
+<div id="q1">
+<p><strong>1.</strong> Quale coppia descrive meglio il metodo positivista?</p>
+<button class="choice" onclick="quiz(1,this,true)">Osservazione + verifica</button>
+<button class="choice" onclick="quiz(1,this,false)">Tradizione + intuizione</button>
+<button class="choice" onclick="quiz(1,this,false)">Dogma + autorità</button>
+<div id="qf1"></div>
+</div>
+<hr>
+<div id="q2">
+<p><strong>2.</strong> Per Comte, lo stadio «positivo» indica una fase in cui la conoscenza cerca soprattutto:</p>
+<button class="choice" onclick="quiz(2,this,false)">cause soprannaturali</button>
+<button class="choice" onclick="quiz(2,this,true)">relazioni tra fenomeni e leggi verificabili</button>
+<button class="choice" onclick="quiz(2,this,false)">spiegazioni puramente mitiche</button>
+<div id="qf2"></div>
+</div>
+<hr>
+<div id="q3">
+<p><strong>3.</strong> Vero o falso: Naturalismo e Verismo sono semplicemente due nomi perfettamente equivalenti della stessa corrente.</p>
+<button class="choice" onclick="quiz(3,this,false)">Vero</button>
+<button class="choice" onclick="quiz(3,this,true)">Falso</button>
+<div id="qf3"></div>
+</div>
+<hr>
+<div id="q4">
+<p><strong>4.</strong> Quale autore è associato al Naturalismo francese?</p>
+<button class="choice" onclick="quiz(4,this,true)">Émile Zola</button>
+<button class="choice" onclick="quiz(4,this,false)">Giovanni Verga</button>
+<button class="choice" onclick="quiz(4,this,false)">Alessandro Manzoni</button>
+<div id="qf4"></div>
+</div>
+<p class="score" id="score">0 / 4</p>
+</div>
+</section>
+
+<section id="challenge">
+<div class="card">
+<span class="badge">8 · COMPITO AUTENTICO</span>
+<h2>Dal fenomeno sociale al testo letterario</h2>
+<p>In coppia: scegliete un fenomeno reale osservabile nella vostra città o nel vostro ambiente scolastico. Progettate una mini-indagine «da scrittori naturalisti/veristi».</p>
+<div class="grid">
+<div><strong>1 · Osservare</strong><p>Che cosa vediamo concretamente?</p></div>
+<div><strong>2 · Documentare</strong><p>Quali dati, testimonianze o immagini raccogliamo?</p></div>
+<div><strong>3 · Interpretare</strong><p>Quali condizioni influenzano il fenomeno?</p></div>
+<div><strong>4 · Narrare</strong><p>Come lo trasformiamo in una scena narrativa senza partire da un giudizio morale esplicito?</p></div>
+</div>
+<textarea placeholder="Titolo del fenomeno + osservazioni + ipotesi + progetto narrativo"></textarea>
+</div>
+</section>
+
+<section id="exit">
+<div class="card">
+<span class="badge">9 · EXIT TICKET</span>
+<h2>Prima di uscire</h2>
+<p>Completa senza consultare il materiale:</p>
+<p><strong>Il Positivismo cambia il modo di pensare la conoscenza perché…</strong></p>
+<textarea id="exitText"></textarea>
+<p><strong>Il Naturalismo si collega al Positivismo perché…</strong></p>
+<textarea></textarea>
+<p><strong>Il Verismo non è semplicemente una «copia italiana» del Naturalismo perché…</strong></p>
+<textarea></textarea>
+<button onclick="saveText()">Salva le mie risposte in questa pagina</button>
+<span id="saved" class="small"></span>
+</div>
+</section>
+
+<section>
+<div class="card">
+<span class="badge">PER IL DOCENTE</span>
+<h2>Uso consigliato: 60–90 minuti</h2>
+<div class="grid">
+<div><strong>10 min</strong><p>Diagnostica iniziale + discussione.</p></div>
+<div><strong>10 min</strong><p>Video in modalità attiva.</p></div>
+<div><strong>15 min</strong><p>Comte + mappa concettuale.</p></div>
+<div><strong>15 min</strong><p>Naturalismo/Verismo e confronto.</p></div>
+<div><strong>15 min</strong><p>Percorso decisionale a coppie.</p></div>
+<div><strong>10 min</strong><p>Quiz + exit ticket.</p></div>
+</div>
+<p class="small">La pagina è pensata per proiezione alla LIM, lavoro individuale su PC/tablet oppure lavoro a coppie. Le risposte possono diventare il punto di partenza per una discussione orale.</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Fonte didattica principale:</strong> materiale PDF fornito dall'insegnante, pp. 17–30, dedicato a Positivismo, Naturalismo e Verismo. Il PDF fornito è composto da pagine immagine, quindi il testo della pagina è stato ricostruito a partire dai contenuti leggibili del documento, mantenendone l'impostazione generale. fileciteturn0file0</p>
+<p>Immagini: Wikimedia Commons, con indicazioni di pubblico dominio/licenza nelle relative pagine. Video: YouTube, incorporato tramite player ufficiale.</p>
+</footer>
+
+<div class="sticky-score">Progresso: <span id="pct">0%</span></div>
+
+<script>
+let done=new Set(), score=0;
+function mark(id){done.add(id); update()}
+function update(){
+  const p=Math.min(100,Math.round(done.size/10*100));
+  document.getElementById('bar').style.width=p+'%';
+  document.getElementById('pct').textContent=p+'%';
+}
+function show(id){document.getElementById(id).classList.remove('hidden');mark(id)}
+function diag(el,ok){
+  document.querySelectorAll('#diagnostic .choice').forEach(x=>x.disabled=true);
+  el.classList.add(ok?'correct':'wrong');
+  document.getElementById('diagfb').textContent=ok?'Esatto: osservazione, raccolta di dati e verifica sono il cuore del metodo positivista.':'Non è la scelta coerente con il metodo positivista descritto nel materiale.';
+  mark('diag');
+}
+function quiz(n,el,ok){
+  document.querySelectorAll('#q'+n+' .choice').forEach(x=>x.disabled=true);
+  el.classList.add(ok?'correct':'wrong');
+  if(ok) score++;
+  document.getElementById('qf'+n).textContent=ok?'Corretto.':'Da rivedere: prova a collegare la risposta alla definizione.';
+  document.getElementById('score').textContent=score+' / 4';
+  mark('q'+n);
+}
+function branch(n,c){
+  const correct={1:'b',2:'b',3:'a'};
+  const box=document.getElementById('b'+n);
+  box.className='feedback';
+  if(c===correct[n]){
+    box.textContent='Scelta coerente. Prosegui.';
+    box.style.color='var(--ok)';
+    mark('branch'+n);
+    const next=document.getElementById('scenario'+(n+1));
+    if(next) next.classList.remove('hidden');
+  }else{
+    box.textContent='Riprova: chiediti quale scelta mette davvero al centro osservazione della realtà, ambiente e riduzione del commento esplicito.';
+    box.style.color='var(--bad)';
+  }
+}
+function saveText(){
+  localStorage.setItem('exitTicket',document.getElementById('exitText').value);
+  document.getElementById('saved').textContent=' ✓ Risposta salvata nel browser.';
+  mark('exit');
+}
+document.getElementById('exitText').value=localStorage.getItem('exitTicket')||'';
+update();
+</script>
+</body>
+</html>
